@@ -1,0 +1,82 @@
+.header div {
+    justify-content: space-between;
+}
+
+.header__left__logo {
+    font-size: large !important;
+}
+
+.header__left__menu_icon button:focus,
+.header__right__create_class button:focus {
+    box-shadow: none;
+}
+
+.photo {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+@media screen and (max-width: 420px) {
+    .header__right__user_info {
+        display: none;
+    }
+    .header__right__create_class {
+        padding: 0 !important;
+    }
+}
+
+.header__middle__navigation__item {
+    height: 4.2rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.header__middle__navigation__item a {
+    display: block;
+    color: #5f6368 !important;
+    height: 100%;
+    padding: 0.125rem 1.5rem 0 1.5rem;
+    font-weight: bold;
+
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+}
+
+.header__middle__navigation__item a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.header__middle__navigation__item a.active {
+    border-bottom: solid 0.2rem #000;
+}
+
+.header__middle_down {
+    display: none;
+}
+
+.header__middle_down::-webkit-scrollbar {
+    display: none;
+}
+
+.header__middle_down {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+@media screen and (max-width: 650px) {
+    .header__middle {
+        display: none !important;
+    }
+    .header__middle_down {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .header__middle_down {
+        overflow-x: auto;
+    }
+}

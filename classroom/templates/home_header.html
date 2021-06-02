@@ -1,0 +1,24 @@
+{% extends 'components/header.html' %}
+
+{% block left %}
+<div class="header__left__logo px-3 my-auto">
+    {% include 'components/logo.html' %}
+</div>
+{% endblock %}
+
+{% block right %}
+<div class="header__right__create_class my-auto px-4">
+    {% if request.user.is_authenticated %}
+    <div class="dropdown">
+        <button class="btn px-0 py-0 fas fa-plus d-block"></button>
+        <div class="dropdown__content">
+            <a class="dropdown__content__item">Create class</a>
+            <a class="dropdown__content__item">Join class</a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+<div class="header__right__user_info my-auto">
+    {% include 'components/photo.html' with src=user.profile.avatar.url %}
+</div>
+{% endblock %}

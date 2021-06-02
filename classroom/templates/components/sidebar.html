@@ -1,0 +1,53 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+<script src="{% static 'js/sidebar.js' %}"></script>
+
+<aside class="sidebar" style="width: 0;">
+
+    <div class="d-flex px-4 py-3 border-bottom">
+        <div class="my-auto">
+            <button class="hide-sidebar btn px-0 py-0 fas fa-bars d-block"></button>
+        </div>
+        <div class="px-3 my-auto">
+            {% include 'components/logo.html' %}
+        </div>
+    </div>
+
+    <div class="sidebar__options">
+        <a href="/" class="sidebar__options__item">
+            <div class="icon_container my-auto">
+                <i class="fas fa-home"></i>
+            </div>
+            <span class="my-auto">Classes</span>
+        </a>
+        <a href="/" class="sidebar__options__item">
+            <div class="icon_container my-auto">
+                <i class="far fa-calendar"></i>
+            </div>
+            <span class="my-auto">Calendar</span>
+        </a>
+
+        <hr>
+
+        <h6 class="sidebar_head">Enrolled</h6>
+        <a href="/" class="sidebar__options__item">
+            <div class="icon_container my-auto">
+                <i class="far fa-check-square"></i>
+            </div>
+            <span class="my-auto">Todo</span>
+        </a>
+
+        {% for i in classes %}
+        <a href="/c/{{i.slug}}/" class="sidebar__options__item sidebar__options__class">
+            <div class="icon_container my-auto">
+                <i class="fab fa-cuttlefish"></i>
+            </div>
+            <div class="my-auto">
+                <span class="d-block">{{i.name}}</span>
+                <small>{{i.teachers.all.0.first_name}} {{i.teachers.all.0.last_name}}</small>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+</aside>

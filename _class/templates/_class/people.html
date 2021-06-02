@@ -1,0 +1,52 @@
+{% extends '_class/base.html' %}
+
+{% block main %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static '_class/css/people.css' %}">
+
+<div class="container people_page my-5">
+
+    <div class="teachers mb-5">
+
+        <div class="people_page_heading">
+            <h3>Teachers</h3>
+            {% if teachers.count > 1 %}
+            <span>{{teachers.count}} teachers</span>
+            {% endif %}
+        </div>
+
+        <div class="teachers__container people_page_content">
+            {% for i in teachers %}
+            <div class="teachers__container__item">
+                {% include 'components/photo.html' with src=i.profile.avatar.url %}
+                <span>{{i.first_name}} {{i.last_name}}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+    <div class="students">
+
+        <div class="people_page_heading">
+            <h3>Students</h3>
+            {% if students.count > 1 %}
+            <span>{{students.count}} students</span>
+            {% endif %}
+        </div>
+
+        <div class="students__container people_page_content">
+            {% for i in students %}
+            <div class="students__container__item">
+                {% include 'components/photo.html' with src=i.profile.avatar.url %}
+                <span>{{i.first_name}} {{i.last_name}}</span>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

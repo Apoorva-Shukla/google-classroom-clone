@@ -1,0 +1,51 @@
+:root {
+    --bgcolor: #fafafa;
+}
+
+body {
+    background-color: var(--bgcolor);
+}
+
+.main,
+.switcher-prompt {
+    display: block;
+    width: 380px;
+}
+
+.submit-form-btn {
+    background-color: #0095f6 !important;
+    font-weight: bold;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.submit-form-btn:hover {
+    opacity: 0.7;
+}
+
+.heading span {
+    font-size: xx-large;
+}
+
+input {
+    background-color: var(--bgcolor) !important;
+    border-radius: 3px !important;
+    font-size: small !important;
+}
+
+input:focus {
+    box-shadow: none !important;
+    border-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+@media screen and (max-width: 450px) {
+    .main,
+    .switcher-prompt {
+        width: 100%;
+        border: none !important;
+        background-color: transparent !important;
+    }
+    input {
+        background-color: #fff !important;
+    }
+}

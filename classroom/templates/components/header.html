@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/header.css' %}" />
+
+<header class="header px-4 bg-white border-bottom">
+    <div class="d-flex">
+        <div class="header__left d-flex py-3">
+            <div class="header__left__menu_icon my-auto">
+                <button class="show-sidebar btn px-0 py-0 fas fa-bars d-block"></button>
+            </div>
+            {% block left %} {% endblock %}
+        </div>
+        <div class="header__middle d-flex">{% block middle %}{% endblock %}</div>
+        <div class="header__right d-flex py-3">{% block right %}{% endblock %}</div>
+    </div>
+    <div class="header__middle_down">
+        {% block middle_down %} {% endblock %}
+    </div>
+</header>

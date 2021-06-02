@@ -1,0 +1,31 @@
+.people-navigations {
+    border-bottom: 5px solid #000;
+}
+
+.people_page_heading {
+    border-bottom: 1px solid #000;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.people_page_content div {
+    padding: 15px;
+    display: flex;
+}
+
+.people_page_content div img {
+    margin: auto 0;
+}
+
+.people_page_content div span {
+    margin: auto 20px;
+}
+
+.people_page_content div:not(:last-child) {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+img {
+    border-radius: 100%!important;
+}

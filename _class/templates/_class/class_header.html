@@ -1,0 +1,47 @@
+{% extends 'components/header.html' %}
+
+{% block left %}
+<div class="header__left__logo px-3 my-auto">
+    <a class="heading d-block text-center" href="/c/{{class.slug}}/">
+        <span>{{class.name}}</span>
+    </a>
+</div>
+{% endblock %}
+
+{% block middle %}
+<div class="header__middle__navigation my-auto d-flex">
+
+    <div class="header__middle__navigation__item">
+        <a class="stream-navigations" href="/c/{{class.slug}}/">Stream</a>
+    </div>
+    <div class="header__middle__navigation__item">
+        <a class="classwork-navigations" href="/c/{{class.slug}}/classwork/">Classwork</a>
+    </div>
+    <div class="header__middle__navigation__item">
+        <a class="people-navigations" href="/c/{{class.slug}}/people/">People</a>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block middle_down %}
+<div class="header__middle__navigation my-auto d-flex">
+
+    <div class="header__middle__navigation__item">
+        <a class="stream-navigations" href="/c/{{class.slug}}/">Stream</a>
+    </div>
+    <div class="header__middle__navigation__item">
+        <a class="classwork-navigations" href="/c/{{class.slug}}/classwork/">Classwork</a>
+    </div>
+    <div class="header__middle__navigation__item">
+        <a class="people-navigations" href="/c/{{class.slug}}/people/">People</a>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block right %}
+<div class="header__right__user_info my-auto">
+    {% include 'components/photo.html' with src=user.profile.avatar.url %}
+</div>
+{% endblock %}

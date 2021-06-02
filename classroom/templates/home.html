@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+
+    <!-- Boostrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <!-- FontAwesome css -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- Ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    {% load static %}
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+    {% include 'components/sidebar.html' %}
+    {% include 'home_header.html' %}
+
+    <main class="main px-3">
+
+        {% if classes %}
+        <!-- Rendering all the classes here -->
+        <ol class="class_list">
+        {% for i in classes %}
+
+            <li class="d-inline-block">
+                <div class="each_class bg-white">
+                    <div class="px-3 py-3 each_class__info">
+                        <h4><a style="color: #fff!important;" href="/c/{{i.slug}}/">{{i.name}}</a></h4>
+                        <span class="d-block">
+                            <span class="fw-bold">Standard:</span>
+                            <span>{{i.standard}}</span>
+                        </span>
+                        <span class="d-block">
+                            <span class="fw-bold">Teacher:</span>
+                            <span>{{i.teachers.all.0.first_name}} {{i.teachers.all.0.last_name}}</span>
+                        </span>
+                        <div class="each_class__info__teacher_photo d-block d-flex">
+                            <div class="d-block"></div>
+                            {% include 'components/photo.html' with src=i.teacher.all.0.profile.avatar.url %}
+                        </div>
+                    </div>
+                    <div class="px-3 py-3 each_class__due_work">
+                        <h1>hi</h1>
+                    </div>
+                </div>
+            </li>
+
+        {% endfor %}
+        </ol>
+        {% else %}
+        <!-- If no classes are shown -->
+        <div class="empty_comment">
+            <div class="empty_comment__image"></div>
+            <h2 class="empty_comment__help d-block">
+                {% if request.user.is_authenticated == True %}
+                Can't see any of your existing classes?
+                <br>
+                <a href="/accounts/login/" class="ob ob-blue d-inline-block">Try another account</a>
+                {% else %}
+                Login with your account to bring your classes here
+                <br>
+                <a href="/accounts/login/" class="ob ob-blue d-inline-block">Log in with your account</a>
+                {% endif %}
+            </h2>
+        </div>
+        {% endif %}
+
+    </main>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</html>

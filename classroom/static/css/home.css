@@ -1,0 +1,119 @@
+body {
+    color: rgba(0,0,0,0.87);
+}
+
+.empty_comment__image {
+    background-image: url("/static/images/empty_states_comments.png");
+    margin-top: 7.5rem;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: contain;
+    background-size: contain;
+    -webkit-flex-shrink: 1;
+    flex-shrink: 1;
+    height: 23.75rem;
+    margin-bottom: 2.5rem;
+    max-height: 90vw;
+    width: 90%;
+}
+
+.empty_comment__help {
+    margin-bottom: 1.5rem;
+    letter-spacing: .01428571em;
+    font-family: Roboto,Arial,sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.25rem;
+    color: #3c4043;
+}
+
+.empty_comment {
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    text-align: center;
+
+    -webkit-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column;
+    flex-flow: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 4rem;
+}
+
+.empty_comment > * {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+@media (max-height: 35.5em) {
+    .empty_comment__image {
+        height: 40%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+
+.class_list {
+    margin: 0;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.class_list li {
+    list-style: none;
+    padding: 9px;
+}
+
+.each_class {
+    border-radius: 7px;
+    width: 350px;
+    margin-top: 15px;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.each_class:hover {
+    box-shadow: h-offset v-offset blur spread color;
+    box-shadow: 0 3px 10px 2px #888;
+    transform: scale(1.02);
+}
+
+.each_class__info {
+    color: #fff;
+    border-radius: 7px 7px 0 0;
+    /* overflow: hidden; */
+    background-color: #3367d5;
+}
+
+@media screen and (max-width: 390px) {
+    .each_class {
+        align-items: center;
+        display: block;
+        margin-bottom: 0.5rem;
+        width: 100%;
+    }
+    .class_list li {
+        display: block !important;
+        width: 100%;
+        list-style: none;
+        padding: 0;
+    }
+}
+
+.each_class__info__teacher_photo {
+    justify-content: space-between;
+    position: relative;
+}
+
+.each_class__info__teacher_photo .photo {
+    width: 62px;
+    height: 62px;
+}
