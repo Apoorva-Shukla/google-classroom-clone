@@ -43,14 +43,11 @@
     align-items: center;
     display: -webkit-box;
     display: -webkit-flex;
+    border-bottom: solid 0.2rem transparent;
 }
 
 .header__middle__navigation__item a:hover {
     background-color: rgba(0, 0, 0, 0.2);
-}
-
-.header__middle__navigation__item a.active {
-    border-bottom: solid 0.2rem #000;
 }
 
 .header__middle_down {
