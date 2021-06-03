@@ -27,6 +27,15 @@
             <span class="my-auto">Calendar</span>
         </a>
 
+        {% if user.is_authenticated %}
+        <a href="/" class="sidebar__options__item account_sidebar">
+            <div class="icon_container my-auto">
+                {% include 'components/photo.html' with src=user.profile.avatar.url %}
+            </div>
+            <span class="my-auto">Account</span>
+        </a>
+        {% endif %}
+
         <hr>
 
         <h6 class="sidebar_head">Enrolled</h6>
