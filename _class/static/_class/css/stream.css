@@ -1,3 +1,16 @@
 .stream-navigations {
     border-bottom: 0.2rem solid #000!important;
 }
+
+.left_content {
+    width: fit-content;
+}
+
+.upcoming,
+.announce {
+    border-radius: 6px;
+}
+
+.right_content {
+    flex: 1;
+}

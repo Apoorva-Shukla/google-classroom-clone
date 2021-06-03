@@ -6,4 +6,38 @@
 {% load static %}
 <link rel="stylesheet" href="{% static '_class/css/stream.css' %}">
 
+<div class="container my-5">
+
+    <div class="banner"></div>
+
+    <div class="stream_content d-flex">
+
+        <div class="left_content px-3">
+            <div class="upcoming border px-3 py-3">
+                <h5 class="mb-3">Upcoming</h5>
+                <div class="mb-3">
+                    <small>Woohoo, no work due soon!</small>
+                </div>
+                <div class="d-flex space-between">
+                    <div class="d-block"></div>
+                    <a class="d-block" href="">View all</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="right_content px-3">
+            <div class="announce bx-shadow border px-3 py-3 d-flex">
+                <div class="my-auto">
+                    {% include 'components/photo.html' with src=user.profile.avatar.url %}
+                </div>
+                <div class="my-auto px-3">
+                    <span>Announce something to your class</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}

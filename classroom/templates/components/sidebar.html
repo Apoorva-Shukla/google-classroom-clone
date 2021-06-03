@@ -14,13 +14,13 @@
     </div>
 
     <div class="sidebar__options">
-        <a href="/" class="sidebar__options__item">
+        <a href="/" class="sidebar__options__item" title="Classes">
             <div class="icon_container my-auto">
                 <i class="fas fa-home"></i>
             </div>
             <span class="my-auto">Classes</span>
         </a>
-        <a href="/" class="sidebar__options__item">
+        <a href="/" class="sidebar__options__item" title="Calendar">
             <div class="icon_container my-auto">
                 <i class="far fa-calendar"></i>
             </div>
@@ -28,7 +28,7 @@
         </a>
 
         {% if user.is_authenticated %}
-        <a href="/" class="sidebar__options__item account_sidebar">
+        <a href="/" class="sidebar__options__item account_sidebar" title="Account">
             <div class="icon_container my-auto">
                 {% include 'components/photo.html' with src=user.profile.avatar.url %}
             </div>
@@ -39,7 +39,7 @@
         <hr>
 
         <h6 class="sidebar_head">Enrolled</h6>
-        <a href="/" class="sidebar__options__item">
+        <a href="/" class="sidebar__options__item" title="Todo">
             <div class="icon_container my-auto">
                 <i class="far fa-check-square"></i>
             </div>
@@ -47,7 +47,7 @@
         </a>
 
         {% for i in classes %}
-        <a href="/c/{{i.slug}}/" class="sidebar__options__item sidebar__options__class">
+        <a href="/c/{{i.slug}}/" class="sidebar__options__item sidebar__options__class" title="{{i.name}}">
             <div class="icon_container my-auto">
                 <i class="fab fa-cuttlefish"></i>
             </div>

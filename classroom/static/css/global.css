@@ -97,3 +97,19 @@ a {
     text-align: center;
     display: inline-block;
 }
+
+.bx-shadow {
+    box-shadow: 0 3px 8px 0 #888;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-evenly {
+    justify-content: space-evenly;
+}
