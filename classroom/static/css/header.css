@@ -1,3 +1,13 @@
+.header {
+    background-color: var(--bgcolor);
+    position: sticky;
+    top: 0;
+}
+
+.header__middle__navigation {
+    justify-content: space-evenly;
+}
+
 .header div {
     justify-content: space-between;
 }
@@ -50,10 +60,6 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-.header__middle_down {
-    display: none;
-}
-
 .header__middle_down::-webkit-scrollbar {
     display: none;
 }
@@ -61,6 +67,11 @@
 .header__middle_down {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
+
+    display: none;
+    position: sticky;
+    top: 0;
+    background-color: inherit;
 }
 
 @media screen and (max-width: 650px) {
@@ -69,6 +80,11 @@
     }
     .header__middle_down {
         display: block;
+        border-bottom: 1px solid #dee2e6!important
+    }
+    .header {
+        border-bottom: 0!important;
+        position: initial;
     }
 }
 
