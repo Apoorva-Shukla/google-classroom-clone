@@ -1,0 +1,13 @@
+@media screen and (max-width: 650px) {
+    .header__middle {
+        display: none !important;
+    }
+    .header__middle_down {
+        display: block;
+        border-bottom: 1px solid #dee2e6!important
+    }
+    .header {
+        border-bottom: 0!important;
+        position: initial;
+    }
+}
