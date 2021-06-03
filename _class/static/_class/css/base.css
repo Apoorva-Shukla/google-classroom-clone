@@ -3,7 +3,7 @@
         display: none !important;
     }
     .header__middle_down {
-        display: block;
+        display: block!important;
         border-bottom: 1px solid #dee2e6!important
     }
     .header {
