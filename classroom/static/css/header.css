@@ -2,6 +2,7 @@
     background-color: var(--bgcolor);
     position: sticky;
     top: 0;
+    z-index: 100;
 }
 
 .header__middle__navigation {
@@ -72,6 +73,8 @@
     position: sticky;
     top: 0;
     background-color: inherit;
+
+    z-index: 101;
 }
 
 @media screen and (max-width: 380px) {

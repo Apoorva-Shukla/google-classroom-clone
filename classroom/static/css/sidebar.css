@@ -7,7 +7,7 @@
     /* box-shadow: 0 0 13px 2px #999; */
     overflow: auto;
     transition: .2s;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .hide-sidebar:focus {
