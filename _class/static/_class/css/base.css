@@ -1,4 +1,29 @@
-@media screen and (max-width: 650px) {
+:root {
+    --themecolor: rgb(184, 6, 114);
+    --themecolor-fade: rgba(184, 6, 114, 0.1);
+    --themecolor-fade-2: rgba(184, 6, 114, 0.2);
+    --themecolor-fade-3: rgba(184, 6, 114, 0.3);
+    --themecolor-fade-4: rgba(184, 6, 114, 0.4);
+    --themecolor-fade-5: rgba(184, 6, 114, 0.5);
+    --themecolor-fade-6: rgba(184, 6, 114, 0.6);
+    --themecolor-fade-7: rgba(184, 6, 114, 0.7);
+    --themecolor-fade-8: rgba(184, 6, 114, 0.8);
+    --themecolor-fade-9: rgba(184, 6, 114, 0.9);
+}
+
+.heading span {
+    color: var(--themecolor);
+}
+
+.header__middle__navigation__item a:hover {
+    background-color: var(--themecolor-fade);
+}
+
+.border-theme {
+    border-color: var(--themecolor)!important;
+}
+
+@media screen and (max-width: 795px) {
     .header__middle {
         display: none !important;
     }

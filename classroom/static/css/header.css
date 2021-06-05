@@ -45,20 +45,16 @@
 
 .header__middle__navigation__item a {
     display: block;
-    color: #5f6368 !important;
+    color: var(--themecolor) !important;
     height: 100%;
     padding: 0.125rem 1.5rem 0 1.5rem;
-    font-weight: bold;
+    font-weight: 500;
 
     -webkit-align-items: center;
     align-items: center;
     display: -webkit-box;
     display: -webkit-flex;
     border-bottom: solid 0.2rem transparent;
-}
-
-.header__middle__navigation__item a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .header__middle_down::-webkit-scrollbar {

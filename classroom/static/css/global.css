@@ -1,11 +1,21 @@
 * {
     font-family: "Roboto", sans-serif;
-    transition: 0.3s;
 }
 
 :root {
     --bgcolor: #fff;
     --hovercolor: #ededee;
+
+    --themecolor: rgb(26, 115, 232);
+    --themecolor-fade: rgba(26, 115, 232, 0.1);
+    --themecolor-fade-2: rgba(26, 115, 232, 0.2);
+    --themecolor-fade-3: rgba(26, 115, 232, 0.3);
+    --themecolor-fade-4: rgba(26, 115, 232, 0.4);
+    --themecolor-fade-5: rgba(26, 115, 232, 0.5);
+    --themecolor-fade-6: rgba(26, 115, 232, 0.6);
+    --themecolor-fade-7: rgba(26, 115, 232, 0.7);
+    --themecolor-fade-8: rgba(26, 115, 232, 0.8);
+    --themecolor-fade-9: rgba(26, 115, 232, 0.9);
 }
 
 body {
@@ -48,11 +58,32 @@ a {
 }
 
 .ob-blue {
-    color: #1a73e8 !important;
+    color: var(--themecolor) !important;
 }
 
 .ob-blue:hover {
-    background-color: rgba(26, 115, 232, 0.1) !important;
+    background-color: var(--themecolor-fade) !important;
+}
+
+.ob:disabled {
+    opacity: 0.75;
+    font-weight: 400;
+}
+
+.ob:disabled:hover {
+    background-color: transparent;
+}
+
+.transparent-theme-btn {
+    color: var(--themecolor);
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 4px;
+    padding: 6px 15px;
+}
+
+.transparent-theme-btn:hover {
+    border: 1px solid var(--themecolor-fade-2);
+    background-color: var(--themecolor-fade);
 }
 
 /* Dropdown Menu */
@@ -113,3 +144,63 @@ a {
 .space-evenly {
     justify-content: space-evenly;
 }
+
+/* elements */
+
+/* textarea and input - 1 */
+.inp-container {
+    width: 100%;
+    position: relative;
+}
+
+.textarea,
+.input {
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    outline: none;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.input ~ .theme-border-bottom,
+.textarea ~ .theme-border-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+}
+
+.input:focus ~ .theme-border-bottom,
+.textarea:focus ~ .theme-border-bottom {
+    border-color: var(--themecolor);
+    width: 100%;
+}
+
+.theme-border-bottom {
+    border: 1px solid transparent;
+    transition: 0.5s;
+}
+
+/* textarea and input - 2 */
+.input-2, .textarea-2 {
+    display: block;
+    width: 100%;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 25px;
+    outline: none;
+    background-color: transparent;
+}
+
+.input-2:focus, .textarea-2:focus {
+    box-shadow: 0 0 0 3px var(--themecolor);
+}
+
+
+input::placeholder, textarea::placeholder {
+    opacity: 0.4;
+}
+
+/* elements */

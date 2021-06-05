@@ -1,13 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from .models import Classroom
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, JsonResponse, Http404
+from .models import Classroom, Post
 from classroom.views import basic_vars
 
 # Create your views here.
 def page(request, slug, template, context_data={}):
     user, classes = basic_vars(request)
 
-    class_room = Classroom.objects.filter(slug=slug).first()
+    class_room = get_object_or_404(Classroom, slug=slug)
+    if user not in class_room.teachers.all() and user not in class_room.students.all():
+        raise Http404()
 
     context = {
         'user': user,
@@ -18,7 +20,10 @@ def page(request, slug, template, context_data={}):
     return render(request, f'{template}', context)
 
 def stream_page(request, slug):
-    return page(request, slug, '_class/stream.html')
+    posts = Post.objects.filter(classroom=Classroom.objects.filter(slug=slug).first())
+    return page(request, slug, '_class/stream.html', {
+        'posts': posts,
+    })
 
 def classwork_page(request, slug):
     return page(request, slug, '_class/classwork.html')

@@ -1,9 +1,10 @@
 .people-navigations {
-    border-bottom: 0.2rem solid #000!important;
+    border-bottom: 0.2rem solid var(--themecolor)!important;
 }
 
 .people_page_heading {
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid var(--themecolor);
+    color: var(--themecolor);
     padding: 15px;
     display: flex;
     justify-content: space-between;
@@ -23,7 +24,7 @@
 }
 
 .people_page_content div:not(:last-child) {
-    border-bottom: 1px solid rgba(128, 128, 128, 0.4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 img {
