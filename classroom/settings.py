@@ -70,6 +70,7 @@ TEMPLATES = [
             'libraries':{
                 'filename': '_class.templatetags.filename',
                 'file_extension': '_class.templatetags.file_extension',
+                'file_preview': '_class.templatetags.file_preview',
             }
         },
     },

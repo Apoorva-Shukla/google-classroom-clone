@@ -1,0 +1,17 @@
+{% load filename %}
+{% load file_extension %}
+{% load file_preview %}
+
+{% if obj.file %}
+<a
+    class="file_container border mt-2 d-flex"
+    target="_blank"
+    href="{{obj.file.url}}"
+>
+    {{obj|file_preview|safe}}
+    <div class="px-2 py-3">
+        <span class="text-dark">{{obj|filename}}</span>
+        <span class="d-block text-secondary">{{obj|file_extension}}</span>
+    </div>
+</a>
+{% endif %}

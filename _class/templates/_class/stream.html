@@ -4,8 +4,6 @@
 
 {% block main %}
 {% load static %}
-{% load filename %}
-{% load file_extension %}
 <link rel="stylesheet" href="{% static '_class/css/stream.css' %}">
 <script src="{% static '_class/js/stream.js' %}"></script>
 
@@ -19,7 +17,7 @@
             <div class="upcoming border px-3 py-3">
                 <h5 class="mb-3">Upcoming</h5>
                 <div class="mb-3">
-                    <small>Woohoo, no work due soon!</small>
+                    <small class="text-secondary">Woohoo, no work due soon!</small>
                 </div>
                 <div class="d-flex space-between">
                     <div class="d-block"></div>
@@ -30,6 +28,7 @@
 
         <div class="right_content px-3">
 
+            {% if page == 1 %}
             <button class="announce bx-shadow border px-3 py-3 d-flex mb-5 d-block">
                 <div class="my-auto">
                     {% include 'components/photo.html' with src=user.profile.avatar.url %}
@@ -39,33 +38,42 @@
                 </div>
             </button>
             <div class="announce-area mb-5 px-4 py-4 bx-shadow d-none">
-                <div class="inp-container mb-4">
-                    <textarea class="textarea" placeholder="Announce something to your class" style="height: 10rem;" id="announce_textarea"></textarea>
-                    <span class="theme-border-bottom"></span>
-                </div>
-                <div class="d-flex space-between">
-                    <button class="ob transparent-theme-btn">
-                        <i class="fas fa-paperclip"></i>
-                        <span style="font-family: 'Roboto', arial;">Add</span>
-                    </button>
-                    <div>
-                        <button class="ob transparent-theme-btn mx-4" id="announce_cancel_btn">
-                            <span style="font-family: 'Roboto', arial;">Cancel</span>
-                        </button>
-                        <button class="ob transparent-theme-btn" id="announce_post_btn" disabled>
-                            <span style="font-family: 'Roboto', arial;">Post</span>
-                        </button>
+                <form id="announce_form">
+                    <div class="inp-container mb-4">
+                        <!-- <textarea class="textarea" placeholder="Announce something to your class" style="height: 10rem;" id="announce_textarea"></textarea> -->
+                        {{form.text}}
+                        <span class="theme-border-bottom"></span>
                     </div>
-                </div>
+                    <div class="d-flex space-between">
+                        <div>
+                            <label for="announce_add_attachment" class="ob transparent-theme-btn" id="announce_add_attachment_label">
+                                <i class="fas fa-paperclip"></i>
+                                <span style="font-family: 'Roboto', arial;">Add</span>
+                            </label>
+                            <!-- <input class="d-none" type="file" id="announce_add_attachment"> -->
+                            {{form.file}}
+                        </div>
+                        <div>
+                            <button type="reset" class="ob transparent-theme-btn mx-4" id="announce_cancel_btn">
+                                <span style="font-family: 'Roboto', arial;">Cancel</span>
+                            </button>
+                            <button type="submit" class="ob transparent-theme-btn" id="announce_post_btn" disabled>
+                                <span style="font-family: 'Roboto', arial;">Post</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
+            {% endif %}
 
             <div class="stream_posts">
                 {% if posts %}
 
                 {% for i in posts %}
+
                 <div class="e_stream_post mb-5 border">
 
-                    <div class="e_stream_post_user_info d-flex mb-2 px-4 py-3">
+                    <div class="e_stream_post_user_info d-flex mb-2 px-4 py-2">
                         <div class="my-auto e_stream_post_user_img_container">
                             {% include 'components/photo.html' with src=i.user.profile.avatar.url %}
                         </div>
@@ -74,39 +82,45 @@
                             <small class="d-block text-secondary">{{i.date}}</small>
                         </div>
                     </div>
-                    <div class="e_stream_post_content px-4 py-3">
+                    <div class="e_stream_post_content px-4">
                         {% if i.text %}
                         <span class="text-secondary">{{i.text}}</span>
                         {% endif %}
-                        {% if i.file %}
-                        <div class="file_container border mt-2 d-flex">
-                            <img class="border-end" src="https://lh3.googleusercontent.com/YMQOhC7hT9vOws9lZzxWg7dsFoIRdklEOm8PbZt7uvAd7WU2fMtaOeZP9EGieaC2hkRQAVjIOnwxwCo=w105-h70-c" alt="">
-                            <div class="px-2 py-3">
-                                <a class="text-dark" target="_blank" href="{{i.file.url}}">{{i|filename}}</a>
-                                <span class="d-block text-secondary">{{i|file_extension}}</span>
-                            </div>
-                        </div>
-                        {% endif %}
+                        {% include 'components/file.html' with obj=i %}
                     </div>
                     <hr>
-                    <div class="e_stream_post_add_comment px-4 py-3">
+                    <div class="e_stream_post_add_comment px-4 mb-3">
                         <div class="d-flex">
                             <div class="my-auto">
                                 {% include 'components/photo.html' with src=user.profile.avatar.url %}
                             </div>
-                            <div class="input-2 px-3 py-2 mx-3 d-flex" style="margin-right: 0!important;">
-                                <input class="w-100" type="text" style="border: none;outline:none;" placeholder="Add a comment">
-                                <button style="border: none;outline:none;background: transparent;">Send</button>
+                            <div class="w-100 mx-3 my-auto" style="margin-right: 0!important;">
+                                <input class="input-2 px-3 py-2" type="text" placeholder="Add a comment">
                             </div>
                         </div>
                     </div>
 
                 </div>
+
                 {% endfor %}
 
                 {% else %}
-                <h6 class="text-center text-secondary">No posts to show</h6>
+                <h6 class="text-center text-secondary">No posts to show{% if page != 1 %}. Perhaps you'd like to select a different tab?{% endif %}</h6>
                 {% endif %}
+            </div>
+            <hr>
+            <div class="pagination_buttons w-100 text-center">
+                <button class="btn">Previous</button>
+                <button class="btn">1</button>
+
+                {% for i in pagi_range %}
+                {% if i != 1 and i < total_pages %}
+                <button class="btn">{{i}}</button>
+                {% endif %}
+                {% endfor %}
+
+                <button class="btn">{{total_pages}}</button>
+                <button class="btn">Next</button>
             </div>
 
         </div>

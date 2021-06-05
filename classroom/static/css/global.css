@@ -195,12 +195,42 @@ a {
 }
 
 .input-2:focus, .textarea-2:focus {
-    box-shadow: 0 0 0 3px var(--themecolor);
-}
-
-
-input::placeholder, textarea::placeholder {
-    opacity: 0.4;
+    box-shadow: 0 0 0 2px var(--themecolor);
 }
 
 /* elements */
+
+/* file container */
+
+.file_container {
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.file_container:hover > div > * {
+    color: var(--themecolor)!important;
+}
+
+.file_container:hover > div {
+    background-color: var(--themecolor-fade);
+}
+
+.file_container div {
+    width: 200px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+/* file container */
+
+/* label */
+label {
+    cursor: pointer;
+}
+/* label */
+
+.disabled {
+    opacity: 0.4!important;
+    cursor: initial!important;
+}

@@ -21,3 +21,39 @@ $(document).on('input', '#announce_textarea', (e) => {
         $('#announce_post_btn').prop('disabled', true);
     }
 });
+
+$(document).on('submit', '#announce_form', (e) => {
+    e.preventDefault();
+
+    var data = new FormData();
+
+    data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+    data.append('text', $('#announce_textarea').val());
+    data.append('file', document.querySelector('#announce_add_attachment').files[0]);
+    data.append('user', 1);
+    data.append('classroom', 1);
+
+    $.ajax({
+        url: window.location,
+        method: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: (data) => {
+            e.target.reset();
+
+            document.getElementById('announce_add_attachment').disabled = false;
+            document.getElementById('announce_add_attachment_label').classList.remove('disabled');
+            document.getElementById('announce_cancel_btn').disabled = false;
+            document.getElementById('announce_post_btn').disabled = false;
+
+            $('.stream_posts').load(location.href + ' .e_stream_post');
+        },
+        beforeSend: () => {
+            document.getElementById('announce_add_attachment').disabled = true;
+            document.getElementById('announce_add_attachment_label').classList.add('disabled');
+            document.getElementById('announce_cancel_btn').disabled = true;
+            document.getElementById('announce_post_btn').disabled = true;
+        },
+    });
+});

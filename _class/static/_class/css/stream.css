@@ -18,6 +18,7 @@
 .announce {
     width: 100%;
     background-color: transparent;
+    color: #6c757d;
 }
 
 .announce:hover {
@@ -51,23 +52,7 @@
     height: 52px;
 }
 
-.file_container {
-    border-radius: 5px;
-    width: fit-content;
-}
-
-.file_container div {
-    width: 200px;
-    white-space: nowrap;
-    overflow-x: hidden;
-    text-overflow: ellipsis;
-}
-
 .e_stream_post_add_comment img {
     width: 40px;
     height: 40px;
-}
-
-.input-2 input:focus .input-2, .textarea-2 textarea:focus .textarea-2{
-    box-shadow: 0 0 0 3px var(--themecolor);
 }
