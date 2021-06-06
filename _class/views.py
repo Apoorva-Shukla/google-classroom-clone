@@ -43,7 +43,7 @@ def stream_page(request, slug):
     posts = list(posts)[::-1]
 
 
-    LIMIT = 2
+    LIMIT = 10
     try:
         PAGE = int(request.GET.get('p', ''))
     except:

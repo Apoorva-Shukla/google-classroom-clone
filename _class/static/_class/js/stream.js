@@ -45,7 +45,8 @@ $(document).on('submit', '#announce_form', (e) => {
             document.getElementById('announce_add_attachment').disabled = false;
             document.getElementById('announce_add_attachment_label').classList.remove('disabled');
             document.getElementById('announce_cancel_btn').disabled = false;
-            document.getElementById('announce_post_btn').disabled = false;
+            // Do not un-disable the post btn
+            // document.getElementById('announce_post_btn').disabled = false;
 
             $('.stream_posts').load(location.href + ' .e_stream_post');
         },
