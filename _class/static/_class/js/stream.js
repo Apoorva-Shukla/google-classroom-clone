@@ -83,7 +83,7 @@ $(document).on('input', '#announce_add_attachment', (e) => {
         html = `<audio src="${url}" controls></audio>`;
     } else {
         html = `
-            <div class="py-5 text-white" style="background-color: #2a2f32;">
+            <div class="py-5 text-white">
                 <span class="px-2 py-3 mx-3" style="background-color: #f34646;border-radius: 3px 20px 3px 3px;">
                     <span>${file.name.toString().split('.')[file.name.toString().split('.').length-1]}</span>
                 </span>
