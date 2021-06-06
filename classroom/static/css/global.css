@@ -234,3 +234,10 @@ label {
     opacity: 0.4!important;
     cursor: initial!important;
 }
+
+.max_image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 600px;
+}

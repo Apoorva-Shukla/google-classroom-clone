@@ -48,6 +48,10 @@ $(document).on('submit', '#announce_form', (e) => {
             // Do not un-disable the post btn
             // document.getElementById('announce_post_btn').disabled = false;
 
+            document.querySelector('#announce_add_attachment').value = '';
+            document.querySelector('.attachment_preview_fluid').innerHTML = '';
+            document.querySelector('.attachment_preview').classList.add('d-none');
+
             $('.stream_posts').load(location.href + ' .e_stream_post');
         },
         beforeSend: () => {
@@ -57,4 +61,42 @@ $(document).on('submit', '#announce_form', (e) => {
             document.getElementById('announce_post_btn').disabled = true;
         },
     });
+});
+
+$(document).on('input', '#announce_add_attachment', (e) => {
+    let fileInput = document.querySelector('#announce_add_attachment');
+    let file = fileInput.files[0];
+    let previewArea = document.querySelector('.attachment_preview');
+    let previewAreaFluid = document.querySelector('.attachment_preview_fluid');
+    previewArea.classList.remove('d-none');
+
+    var html = '';
+    let url;
+    if (file.type.includes('image')) {
+        url = URL.createObjectURL(file);
+        html = `<img src="${url}" alt=" " class="max_image">`;
+    } else if (file.type.includes('video')) {
+        url = URL.createObjectURL(file);
+        html = `<video src="${url}" controls class="max_image"></video>`;
+    } else if (file.type.includes('audio')) {
+        url = URL.createObjectURL(file);
+        html = `<audio src="${url}" controls></audio>`;
+    } else {
+        html = `
+            <div class="py-5 text-white" style="background-color: #2a2f32;">
+                <span class="px-2 py-3 mx-3" style="background-color: #f34646;border-radius: 3px 20px 3px 3px;">
+                    <span>${file.name.toString().split('.')[file.name.toString().split('.').length-1]}</span>
+                </span>
+                <span>${file.name.toString()}</span>
+            </div>
+        `;
+    }
+
+    previewAreaFluid.innerHTML = html;
+});
+
+$(document).on('click', '.clear_attachment', (e) => {
+    document.querySelector('#announce_add_attachment').value = '';
+    document.querySelector('.attachment_preview_fluid').innerHTML = '';
+    document.querySelector('.attachment_preview').classList.add('d-none');
 });
