@@ -143,13 +143,17 @@
                 {% if total_pages > 1 %}
                 <hr>
                 <div class="pagination_buttons_fluid d-flex space-between">
-                    {% if page > 1 %}
+                    {% if page > 1 and page <= total_pages %}
                     <button class="btn btn-primary" onclick="insertParam('p', Number('{{page}}')-1);">Previous</button>
                     {% else %}
                     <button class="btn btn-primary" disabled>Previous</button>
                     {% endif %}
 
-                    {% if page < total_pages %}
+                    {% if page > total_pages or page == 0 %}
+                    <button class="btn btn-primary" onclick="insertParam('p', 1);">Home</button>
+                    {% endif %}
+
+                    {% if page < total_pages and page > 0 %}
                     <button class="btn btn-primary" onclick="insertParam('p', Number('{{page}}')+1);">Next</button>
                     {% else %}
                     <button class="btn btn-primary" disabled>Next</button>
