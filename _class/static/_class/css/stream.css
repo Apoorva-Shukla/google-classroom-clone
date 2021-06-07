@@ -47,6 +47,10 @@
     border-radius: 8px;
 }
 
+.e_stream_post_br {
+    border-radius: 0 8px 8px 8px;
+}
+
 .e_stream_post_user_img_container img {
     width: 52px;
     height: 52px;
@@ -55,4 +59,10 @@
 .e_stream_post_add_comment img {
     width: 40px;
     height: 40px;
+}
+
+@media screen and (max-width: 770px) {
+    .post_pointer {
+        display: none!important;
+    }
 }

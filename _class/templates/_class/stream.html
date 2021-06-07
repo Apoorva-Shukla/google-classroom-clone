@@ -4,6 +4,8 @@
 
 {% block main %}
 {% load static %}
+{% load next %}
+{% load previous %}
 <link rel="stylesheet" href="{% static '_class/css/stream.css' %}">
 <script src="{% static '_class/js/stream.js' %}"></script>
 
@@ -76,46 +78,66 @@
             {% endif %}
 
             <div class="stream_posts">
-                {% if posts %}
+                <div class="stream_posts_fluid">
+                    {% if posts %}
 
-                {% for i in posts %}
+                    {% for i in posts %}
 
-                <div class="e_stream_post mb-5 border">
+                    <div class="d-flex">
+                        {% with previous_element=posts|previous:forloop.counter0 %}
 
-                    <div class="e_stream_post_user_info d-flex mb-2 px-4 py-2">
-                        <div class="my-auto e_stream_post_user_img_container">
-                            {% include 'components/photo.html' with src=i.user.profile.avatar.url %}
-                        </div>
-                        <div class="my-auto mx-3">
-                            <span>{{i.user.first_name}}</span>
-                            <small class="d-block text-secondary">{{i.date}}</small>
-                        </div>
-                    </div>
-                    <div class="e_stream_post_content px-4">
-                        {% if i.text %}
-                        <span class="text-secondary">{{i.text}}</span>
-                        {% endif %}
-                        {% include 'components/file.html' with obj=i %}
-                    </div>
-                    <hr>
-                    <div class="e_stream_post_add_comment px-4 mb-3">
-                        <div class="d-flex">
-                            <div class="my-auto">
-                                {% include 'components/photo.html' with src=user.profile.avatar.url %}
+                        {% if i.user != previous_element.user or forloop.counter0 == 0 %}
+                        <div class="post_pointer d-flex">
+                            {% else %}
+                            <div class="post_pointer d-flex" style="opacity: 0;">
+                            {% endif %}
+                            <div style="padding-right: 15px;">
+                                {% include 'components/photo.html' with src=i.user.profile.avatar.url %}
                             </div>
-                            <div class="w-100 mx-3 my-auto" style="margin-right: 0!important;">
-                                <input class="input-2 px-3 py-2" type="text" placeholder="Add a comment">
+                            <span class="tooltip_arrow_holder">
+                                <span class="tooltip_arrow"></span>
+                            </span>
+                        </div>
+
+                        {% endwith %}
+                        <div class="e_stream_post mb-5 border" style="flex: 1;">
+
+                            <div class="e_stream_post_user_info d-flex mb-2 px-4 py-2">
+                                <div class="my-auto e_stream_post_user_img_container">
+                                    {% include 'components/photo.html' with src=i.user.profile.avatar.url %}
+                                </div>
+                                <div class="my-auto mx-3">
+                                    <span>{{i.user.first_name}}</span>
+                                    <small class="d-block text-secondary">{{i.date}}</small>
+                                </div>
                             </div>
+                            <div class="e_stream_post_content px-4">
+                                {% if i.text %}
+                                <span class="text-secondary">{{i.text}}</span>
+                                {% endif %}
+                                {% include 'components/file.html' with obj=i %}
+                            </div>
+                            <hr>
+                            <div class="e_stream_post_add_comment px-4 mb-3">
+                                <div class="d-flex">
+                                    <div class="my-auto">
+                                        {% include 'components/photo.html' with src=user.profile.avatar.url %}
+                                    </div>
+                                    <div class="w-100 mx-3 my-auto" style="margin-right: 0!important;">
+                                        <input class="input-2 px-3 py-2" type="text" placeholder="Add a comment">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
+                    {% endfor %}
+
+                    {% else %}
+                    <h6 class="text-center text-secondary">No posts to show{% if page != 1 %}. Perhaps you'd like to select a different tab?{% endif %}</h6>
+                    {% endif %}
                 </div>
-
-                {% endfor %}
-
-                {% else %}
-                <h6 class="text-center text-secondary">No posts to show{% if page != 1 %}. Perhaps you'd like to select a different tab?{% endif %}</h6>
-                {% endif %}
             </div>
             <hr>
             <div class="pagination_buttons w-100 text-center">

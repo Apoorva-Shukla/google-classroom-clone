@@ -185,7 +185,8 @@ a {
 }
 
 /* textarea and input - 2 */
-.input-2, .textarea-2 {
+.input-2,
+.textarea-2 {
     display: block;
     width: 100%;
     border: 1px solid rgba(128, 128, 128, 0.4);
@@ -194,7 +195,8 @@ a {
     background-color: transparent;
 }
 
-.input-2:focus, .textarea-2:focus {
+.input-2:focus,
+.textarea-2:focus {
     box-shadow: 0 0 0 2px var(--themecolor);
 }
 
@@ -208,7 +210,7 @@ a {
 }
 
 .file_container:hover > div > * {
-    color: var(--themecolor)!important;
+    color: var(--themecolor) !important;
 }
 
 .file_container:hover > div {
@@ -231,8 +233,8 @@ label {
 /* label */
 
 .disabled {
-    opacity: 0.4!important;
-    cursor: initial!important;
+    opacity: 0.4 !important;
+    cursor: initial !important;
 }
 
 .max_image {
@@ -240,4 +242,28 @@ label {
     height: auto;
     max-width: 100%;
     max-height: 600px;
+}
+
+.tooltip_arrow_holder {
+    position: relative;
+}
+
+.tooltip_arrow {
+    /* display: block;
+    position: absolute;
+    top: -5px;*/
+    z-index: 99;
+}
+
+.tooltip_arrow::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid #dee2e6;
+    left: -12px;
+    top: 6px;
 }

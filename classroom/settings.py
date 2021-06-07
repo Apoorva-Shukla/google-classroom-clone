@@ -71,6 +71,8 @@ TEMPLATES = [
                 'filename': '_class.templatetags.filename',
                 'file_extension': '_class.templatetags.file_extension',
                 'file_preview': '_class.templatetags.file_preview',
+                'next': '_class.templatetags.next',
+                'previous': '_class.templatetags.previous',
             }
         },
     },

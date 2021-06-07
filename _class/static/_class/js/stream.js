@@ -52,7 +52,7 @@ $(document).on('submit', '#announce_form', (e) => {
             document.querySelector('.attachment_preview_fluid').innerHTML = '';
             document.querySelector('.attachment_preview').classList.add('d-none');
 
-            $('.stream_posts').load(location.href + ' .e_stream_post');
+            $('.stream_posts').load(location.href + ' .stream_posts_fluid');
         },
         beforeSend: () => {
             document.getElementById('announce_add_attachment').disabled = true;
