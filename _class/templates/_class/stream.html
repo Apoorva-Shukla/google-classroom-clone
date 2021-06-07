@@ -139,8 +139,9 @@
                     {% endif %}
                 </div>
             </div>
-            <hr>
             <div class="pagination_buttons">
+                {% if total_pages > 1 %}
+                <hr>
                 <div class="pagination_buttons_fluid d-flex space-between">
                     {% if page > 1 %}
                     <button class="btn btn-primary" onclick="insertParam('p', Number('{{page}}')-1);">Previous</button>
@@ -154,6 +155,7 @@
                     <button class="btn btn-primary" disabled>Next</button>
                     {% endif %}
                 </div>
+                {% endif %}
             </div>
 
         </div>
