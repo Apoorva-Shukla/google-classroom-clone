@@ -140,18 +140,20 @@
                 </div>
             </div>
             <hr>
-            <div class="pagination_buttons w-100 text-center">
-                <button class="btn">Previous</button>
-                <button class="btn">1</button>
+            <div class="pagination_buttons">
+                <div class="pagination_buttons_fluid d-flex space-between">
+                    {% if page > 1 %}
+                    <button class="btn btn-primary" onclick="insertParam('p', Number('{{page}}')-1);">Previous</button>
+                    {% else %}
+                    <button class="btn btn-primary" disabled>Previous</button>
+                    {% endif %}
 
-                {% for i in pagi_range %}
-                {% if i != 1 and i < total_pages %}
-                <button class="btn">{{i}}</button>
-                {% endif %}
-                {% endfor %}
-
-                <button class="btn">{{total_pages}}</button>
-                <button class="btn">Next</button>
+                    {% if page < total_pages %}
+                    <button class="btn btn-primary" onclick="insertParam('p', Number('{{page}}')+1);">Next</button>
+                    {% else %}
+                    <button class="btn btn-primary" disabled>Next</button>
+                    {% endif %}
+                </div>
             </div>
 
         </div>

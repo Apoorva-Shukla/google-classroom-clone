@@ -52,7 +52,10 @@ $(document).on('submit', '#announce_form', (e) => {
             document.querySelector('.attachment_preview_fluid').innerHTML = '';
             document.querySelector('.attachment_preview').classList.add('d-none');
 
+            // updating the post section
             $('.stream_posts').load(location.href + ' .stream_posts_fluid');
+            // updating the pagination button section
+            $('.pagination_buttons').load(location.href + ' .pagination_buttons_fluid');
         },
         beforeSend: () => {
             document.getElementById('announce_add_attachment').disabled = true;
@@ -100,3 +103,32 @@ $(document).on('click', '.clear_attachment', (e) => {
     document.querySelector('.attachment_preview_fluid').innerHTML = '';
     document.querySelector('.attachment_preview').classList.add('d-none');
 });
+
+
+function insertParam(key, value) {
+    key = encodeURIComponent(key);
+    value = encodeURIComponent(value);
+
+    // kvp looks like ['key1=value1', 'key2=value2', ...]
+    var kvp = document.location.search.substr(1).split('&');
+    let i=0;
+
+    for(; i<kvp.length; i++){
+        if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+        }
+    }
+
+    if(i >= kvp.length){
+        kvp[kvp.length] = [key,value].join('=');
+    }
+
+    // can return this or...
+    let params = kvp.join('&');
+
+    // reload page with new params
+    document.location.search = params;
+}

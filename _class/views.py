@@ -45,7 +45,7 @@ def stream_page(request, slug):
 
     LIMIT = 10
     try:
-        PAGE = int(request.GET.get('p', ''))
+        PAGE = abs(int(request.GET.get('p', '')))
     except:
         PAGE = 1
     number_of_pages = int(math.ceil(total_querysets / LIMIT))
@@ -57,8 +57,6 @@ def stream_page(request, slug):
         'form': form,
         'page': PAGE,
         'total_pages': number_of_pages,
-        'limit': LIMIT,
-        'pagi_range': range(PAGE, PAGE+3),
     })
 
 def classwork_page(request, slug):
