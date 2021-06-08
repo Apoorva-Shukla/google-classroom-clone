@@ -33,13 +33,14 @@ $(document).on('click', '#announce_cancel_btn', (e) => {
 $(document).on('submit', '#announce_form', (e) => {
     e.preventDefault();
 
-    var data = new FormData();
+    let data = new FormData();
 
     data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
     data.append('text', $('#announce_textarea').val());
     data.append('file', document.querySelector('#announce_add_attachment').files[0]);
     data.append('user', 1);
     data.append('classroom', 1);
+    data.append('_name', 'post');
 
     $.ajax({
         url: window.location,
@@ -124,6 +125,81 @@ $(document).on('click', '.clear_attachment', (e) => {
     document.querySelector('.attachment_preview').classList.add('d-none');
 });
 
+// post comment
+$(document).on('submit', '.post_comment_form', (e) => {
+    e.preventDefault();
+
+    let data = new FormData();
+    let text = document.getElementById(`${e.target.id.toString().replace('form', 'input')}`);
+    data.append('csrfmiddlewaretoken', $('input[name=csrfmiddlewaretoken]').val());
+    data.append('post', Number(e.target.id.toString().replace('_post_comment_form', '')));
+    data.append('text', text.value);
+    data.append('_name', 'comment');
+
+    $.ajax({
+        url: window.location,
+        method: 'POST',
+        data: data,
+        processData: false,
+        contentType: false,
+        success: (data) => {
+            text.disabled = false;
+            text.value = '';
+
+            // render newest comment
+            let comment = $.parseJSON(data.comment)[0].fields;
+            let avatar = data.avatar;
+            let user = data.user;
+
+            let id = `#${e.target.id.toString().replace('_post_comment_form', '')}_comments_section`;
+            let commentSection = $(id).find('div.comments_section_fluid');
+            commentSection.parent().removeClass('d-none');
+
+            let avatarHtml = ''
+            if (avatar == '') {
+                avatarHtml = `<img class="photo" src="../../../media/defaults/user/default_user_img.png" alt=" ">`
+            } else {
+                avatarHtml = `<img class="photo" src="${avatar}" alt=" ">`
+            }
+
+            let months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            let date = comment.date.split('-')[2];
+            let mon = months[Number(comment.date.split('-')[1]) - 1];
+            let year = comment.date.split('-')[0];
+
+            let hour = comment.time.split(':')[0];
+            let min = comment.time.split(':')[1];
+
+            commentSection.prepend(`
+            <div class="e_comment py-2">
+                <div class="d-flex">
+                    <div class="mx-3 my-auto" style="margin-left: 0!important;">
+                        ${avatarHtml}
+                    </div>
+                    <div class="my-auto">
+                        <div>
+                            <span class="text-secondary">${user}</span>
+                            <small class="text-secondary">${mon} ${Number(date)}, ${year} ${hour}:${min}</small>
+                        </div>
+                        <div>
+                            <span>${comment.text}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `);
+        },
+        beforeSend: () => {
+            text.disabled = true;
+        },
+        error: () => {
+            alert('Something went wrong, please try again')
+            text.disabled = false;
+            text.focus();
+        },
+    });
+});
 
 function insertParam(key, value) {
     key = encodeURIComponent(key);

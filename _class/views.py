@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
-from .models import Classroom, Post
+from .models import Classroom, Post, Comment
+from user.models import Profile
 from .forms import PostForm
 from classroom.views import basic_vars
 from django.core.serializers import serialize
@@ -26,17 +27,23 @@ def stream_page(request, slug):
     form = PostForm(request.POST or None, request.FILES or None, user=request.user)
     if request.method == 'POST':
         if request.is_ajax():
-            if form.is_valid():
-                if not(request.user not in Classroom.objects.filter(slug=slug).first().teachers.all() and request.user not in Classroom.objects.filter(slug=slug).first().students.all()):
-                    form.save()
+            if request.POST.get('_name', '') == 'post':
+                if form.is_valid():
+                    if not(request.user not in Classroom.objects.filter(slug=slug).first().teachers.all() and request.user not in Classroom.objects.filter(slug=slug).first().students.all()):
+                        form.save()
+                        return JsonResponse(data={
+                            '': '',
+                        })
 
-                    cr = Classroom.objects.filter(slug=slug).first()
-                    this_post = Post.objects.filter(classroom=cr, user=request.user).last()
-                    this_post = serialize('json', [this_post])
+            elif request.POST.get('_name', '') == 'comment':
+                comment = Comment(user=request.user, post=Post.objects.filter(pk=int(request.POST.get('post', ''))).first(), text=request.POST.get('text', ''))
+                comment.save()
 
-                    return JsonResponse(data={
-                        'this_post': this_post,
-                    })
+                return JsonResponse(data={
+                    'comment': serialize('json', [comment]),
+                    'user': f'{request.user.first_name} {request.user.last_name}',
+                    'avatar': Profile.objects.filter(user=request.user).first().avatar.url,
+                })
 
     posts = Post.objects.filter(classroom=Classroom.objects.filter(slug=slug).first())
     total_querysets = posts.count()

@@ -117,6 +117,10 @@
                                 {% endif %}
                                 {% include 'components/file.html' with obj=i %}
                             </div>
+                            <div class="comments_section d-none" id="{{i.pk}}_comments_section">
+                                <hr>
+                                <div class="comments_section_fluid px-3 py-2"></div>
+                            </div>
                             <hr>
                             <div class="e_stream_post_add_comment px-4 mb-3">
                                 <div class="d-flex">
@@ -124,7 +128,9 @@
                                         {% include 'components/photo.html' with src=user.profile.avatar.url %}
                                     </div>
                                     <div class="w-100 mx-3 my-auto" style="margin-right: 0!important;">
-                                        <input class="input-2 px-3 py-2" type="text" placeholder="Add a comment">
+                                        <form id="{{i.pk}}_post_comment_form" class="post_comment_form">
+                                            <input id="{{i.pk}}_post_comment_input" class="input-2 px-3 py-2" type="text" placeholder="Add a comment">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
