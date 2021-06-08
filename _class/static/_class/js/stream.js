@@ -4,7 +4,7 @@ $(document).on('click', '.announce, #announce_cancel_btn', (e) => {
     $('.announce-area').find('textarea').focus();
 });
 
-$(document).on('input', '#announce_textarea', (e) => {
+function validatePostForm() {
     let input = $('#announce_textarea');
     let space_count = 0;
     let enter_count = 0;
@@ -20,6 +20,14 @@ $(document).on('input', '#announce_textarea', (e) => {
     } else {
         $('#announce_post_btn').prop('disabled', true);
     }
+}
+
+$(document).on('input', '#announce_textarea', (e) => {
+    validatePostForm();
+});
+
+$(document).on('click', '#announce_cancel_btn', (e) => {
+    $('.clear_attachment').click();
 });
 
 $(document).on('submit', '#announce_form', (e) => {
@@ -45,10 +53,12 @@ $(document).on('submit', '#announce_form', (e) => {
             document.getElementById('announce_add_attachment').disabled = false;
             document.getElementById('announce_add_attachment_label').classList.remove('disabled');
             document.getElementById('announce_cancel_btn').disabled = false;
+            document.querySelector('#announce_textarea').disabled = false;
             // Do not un-disable the post btn
             // document.getElementById('announce_post_btn').disabled = false;
 
             document.querySelector('#announce_add_attachment').value = '';
+            document.querySelector('#announce_textarea').value = '';
             document.querySelector('.attachment_preview_fluid').innerHTML = '';
             document.querySelector('.attachment_preview').classList.add('d-none');
 
@@ -62,6 +72,16 @@ $(document).on('submit', '#announce_form', (e) => {
             document.getElementById('announce_add_attachment_label').classList.add('disabled');
             document.getElementById('announce_cancel_btn').disabled = true;
             document.getElementById('announce_post_btn').disabled = true;
+            document.querySelector('#announce_textarea').disabled = true;
+        },
+        error: () => {
+            alert('Something went wrong, please try again');
+            document.getElementById('announce_add_attachment').disabled = false;
+            document.getElementById('announce_add_attachment_label').classList.remove('disabled');
+            document.getElementById('announce_cancel_btn').disabled = false;
+            document.querySelector('#announce_textarea').disabled = false;
+
+            validatePostForm();
         },
     });
 });
