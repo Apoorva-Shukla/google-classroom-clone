@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse, Http404
+from django.core.paginator import Paginator
+from django.core.serializers import serialize
 from .models import Classroom, Post, Comment
 from user.models import Profile
 from .forms import PostForm
 from classroom.views import basic_vars
-from django.core.serializers import serialize
 import math
 
 # Create your views here.
@@ -45,25 +46,26 @@ def stream_page(request, slug):
                     'avatar': Profile.objects.filter(user=request.user).first().avatar.url,
                 })
 
-    posts = Post.objects.filter(classroom=Classroom.objects.filter(slug=slug).first())
-    total_querysets = posts.count()
-    posts = list(posts)[::-1]
-
-
+    posts = list(Post.objects.filter(classroom=Classroom.objects.filter(slug=slug).first()))[::-1]
     LIMIT = 10
     try:
         PAGE = abs(int(request.GET.get('p', '')))
     except:
         PAGE = 1
-    number_of_pages = int(math.ceil(total_querysets / LIMIT))
 
-    start = (PAGE - 1) * LIMIT
-    end = start + LIMIT
+    posts = Paginator(posts, LIMIT)
+    total_pages = posts.num_pages
+
+    try:
+        posts.page(PAGE)
+    except:
+        posts = []
+
     return page(request, slug, '_class/stream.html', {
-        'posts': posts[start:end],
+        'posts': posts,
         'form': form,
         'page': PAGE,
-        'total_pages': number_of_pages,
+        'total_pages': total_pages,
     })
 
 def classwork_page(request, slug):
