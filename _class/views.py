@@ -57,7 +57,7 @@ def stream_page(request, slug):
     total_pages = posts.num_pages
 
     try:
-        posts.page(PAGE)
+        posts = posts.page(PAGE)
     except:
         posts = []
 
